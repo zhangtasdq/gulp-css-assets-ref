@@ -1,0 +1,23 @@
+{
+  "name": "gulp-css-assets-ref",
+  "version": "0.0.1",
+  "description": "gulp css assets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gulp",
+    "css",
+    "assets",
+    "ref",
+    "gulpplugin"
+  ],
+  "author": "zhang",
+  "license": "MIT",
+  "dependencies": {
+    "gulp-util": "^3.0.8",
+    "through2": "^2.0.3",
+    "vinyl-fs": "^3.0.0"
+  }
+}
