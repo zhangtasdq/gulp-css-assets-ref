@@ -1,7 +1,7 @@
 {
   "name": "gulp-css-assets-ref",
   "version": "0.0.1",
-  "description": "gulp css assets",
+  "description": "gulp css assets ref",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
