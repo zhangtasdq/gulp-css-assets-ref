@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'test';
+    src: url("../../fonts/test-font.eot");
+    src: url("../../fonts/test-font.eot?#iefix") format('embedded-opentype'), 
+         url("../../fonts/test-font.svg#glyphicons_halflingsregular") format('svg');
+}
+
+.deep {
+    background-image: url( "../../imgs/deep-bg.png");
+}

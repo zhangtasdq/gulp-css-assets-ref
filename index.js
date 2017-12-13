@@ -1,9 +1,9 @@
 let nodePath = require("path"),
     vinylFs = require("vinyl-fs"),
     through = require("through2"),
-    PｕginError = require("gulp-util").PluginError;
+    PluginError = require("gulp-util").PluginError;
 
-const PLUGIN_NAME = "gulp-css-assets";
+const PLUGIN_NAME = "gulp-css-assets-ref";
 // 匹配 css 文件中的 url 中的值
 const URL_REG = /url\s*\(\s*(['"]?)(.*?)\1\s*\)/g;
 // 获取路径中除相对路径以外的值，即 ../../img/hello.png => /img/hello.png
@@ -78,7 +78,7 @@ function getFileFolderPath(filePath) {
 function buildAssetUrlPath(assetPath, folder) {
     let pathSuffix = getRelativePathSuffix(assetPath);
 
-    return `./${foler}${pathSuffix}`;
+    return `./${folder}${pathSuffix}`;
 }
 
 /**
@@ -118,7 +118,7 @@ function processCssFile(file, options, callback) {
         fileAssetsPath.push(cleanPath);
         assetPathMap[cleanPath] = cleanAssetPath(assetUrl);
 
-        return `url(./${assetUrl})`;
+        return `url(${assetUrl})`;
     });
 
     // 重写文件的内容以及路径
@@ -154,7 +154,7 @@ function gulpCssAssets(options) {
         }
 
         if (file.isStream()) {
-            this.emit("error", new PluginError(PLUGIN_NAME, "Streams not support!"));
+            this.emit("error", new PluginError(PLUGIN_NAME, "stream not support!"));
             return callback();
         }
 
