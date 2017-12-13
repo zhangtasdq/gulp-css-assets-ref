@@ -1,7 +1,8 @@
 {
   "name": "gulp-css-assets-ref",
   "version": "0.0.1",
-  "description": "gulp css assets ref",
+  "description": "gulp plugin for process css resources",
+  "repository": "https://github.com/zhangtasdq/gulp-css-assets-ref.git",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
