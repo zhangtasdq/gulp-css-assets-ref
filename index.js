@@ -78,7 +78,7 @@ function getFileFolderPath(filePath) {
 function buildAssetUrlPath(assetPath, folder) {
     let pathSuffix = getRelativePathSuffix(assetPath);
 
-    return nodePath.join(".", folder, pathSuffix);
+    return `./${foler}${pathSuffix}`;
 }
 
 /**
@@ -129,15 +129,15 @@ function processCssFile(file, options, callback) {
     // 如果文件中引用有资源，则添加到流中，没有则直接跳过
     if (fileAssetsPath.length > 0) {
         vinylFs.src(fileAssetsPath, {base: file.cwd}).
-        pipe(through.obj(function (assetFile, end, assetCallback) {
-            assetFile.path = nodePath.join(assetFile.base, assetPathMap[assetFile.path]);
-            self.push(assetFile);
+                pipe(through.obj(function (assetFile, end, assetCallback) {
+                    assetFile.path = nodePath.join(assetFile.base, assetPathMap[assetFile.path]);
+                    self.push(assetFile);
 
-            assetCallback();
-        })).on("finish", function () {
-            self.push(file);  
-            callback();
-        });
+                    assetCallback();
+                })).on("finish", function () {
+                    self.push(file);  
+                    callback();
+                });
     } else {
         this.push(file);
         callback();
