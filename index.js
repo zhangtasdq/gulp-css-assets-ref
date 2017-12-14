@@ -31,13 +31,15 @@ function getBaseName(path) {
  * 依据是
  *     1. 是 css 文件
  *     2. options 中有对应的配置
+ *     3. options 中配置有 processAllFile 为 true
  * @param {object} file 
  * @param {object} options 
  */
 function shouldProcessFile(file, options) {
     let relativePath = file.relative;
 
-    return isCssFile(relativePath) && options[getBaseName(relativePath)];
+    return isCssFile(relativePath) && 
+           (options[getBaseName(relativePath)] || options.processAllFile === true);
 }
 
 /**
@@ -47,6 +49,10 @@ function shouldProcessFile(file, options) {
  */
 function getAssetFolder(file, options) {
     let relativePath = file.relative;
+    
+    if (options.processAllFile) {
+        return nodePath.parse(relativePath).name;
+    }
 
     return options[getBaseName(relativePath)];
 }

@@ -1,8 +1,8 @@
 gulp-css-assets-ref
 ===
-> 用于在使用 `gulp` 打包 `css` 的时候, `css` 中引用的图片、字体等无法同时打包的问题.
-> 主要是将打包的 `css` 文件中引用到的图片和字体文件提取后一起输出到 `gulp.dest` 中，同时
-> 会修改 `css` 文件中的 `url` 以指向打包后的路径
+> 用于 gulp 打包 `css` 时，将 `css` 引用的图片和字体文件一起输出到 `gulp.dest` 中，
+> 同时可以将不同的 `css` 所引用的图片和字体按不同的目录存放，避免同名文件冲突的问题，
+> 同时会修改 `css` 文件中的 `url` 使其指向打包后的路径
 
 使用方法
 ---
@@ -39,7 +39,7 @@ gulp.task("example", () => {
 ``` css
 .close {
     color: #fff;
-    background-image: url( ".／arch/imgs/icon_book.png" );
+    background-image: url(.／arch/imgs/icon_book.png);
 }
 ```
 
@@ -53,7 +53,7 @@ gulp.task("example", () => {
 #### 生成后
 ```css
 .bg {
-    background-image: url("./base/imgs/login_close.png");
+    background-image: url(./base/imgs/login_close.png);
 }
 ```
 
@@ -87,9 +87,18 @@ gulp.task("example", () => {
 ```
 #####
 
+### 参数
+#### Hash
+> 以文件名作为 `key`, 值为存放资源的目录，如 `{"base.css": "base"}`, 
+> 会将 `base.css` 中所引用的资源存放到 `base` 目录下，
+> 同时会修改 `base.css` 中的 `url` 使其指向 `base` 目录,而其它 `css` 文件则被忽略
+
+#### processAllFile
+> 当这个参数设置为 `true` 时，将会处理所有的 `css` 文件，将每个 `css` 文件所引用的资源都
+> 存放到该文件的文件名目录下
 
 ### 实际使用
-> 因此插件会将图片、字体等资源写入 `gulp`处理过程中，因些会对合并压缩 `css` 产生影响，
+> 因此插件会将图片、字体等资源写入 `gulp`处理过程中，因此会对合并压缩 `css` 产生影响，
 > 所以需要在合并压缩时进行判断,使用 `gulp-if` 插件，如下所示
 
 ```js
